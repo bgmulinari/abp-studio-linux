@@ -1,0 +1,46 @@
+Name: abp-studio
+Version: __RPM_VERSION__
+Release: __RPM_RELEASE__
+Summary: ABP Studio for Linux
+License: Proprietary
+BuildArch: __ARCH__
+Requires: mkcert
+Requires: wireguard-tools
+Requires: libICE.so.6()(64bit)
+Requires: libSM.so.6()(64bit)
+
+%description
+Unofficial local Linux package for ABP Studio built from a locally supplied
+upstream ABP Studio package.
+
+%install
+mkdir -p %{buildroot}
+cp -a __STAGING_ROOT__/. %{buildroot}/
+
+%files
+/opt/abp-studio
+/usr/bin/abp-studio
+/usr/share/applications/abp-studio.desktop
+/usr/share/icons/hicolor/*/apps/abp-studio.png
+
+%post
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database -q /usr/share/applications >/dev/null 2>&1 || true
+fi
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor >/dev/null 2>&1 || true
+fi
+if command -v xdg-icon-resource >/dev/null 2>&1; then
+  xdg-icon-resource forceupdate --theme hicolor >/dev/null 2>&1 || true
+fi
+
+%postun
+if command -v update-desktop-database >/dev/null 2>&1; then
+  update-desktop-database -q /usr/share/applications >/dev/null 2>&1 || true
+fi
+if command -v gtk-update-icon-cache >/dev/null 2>&1; then
+  gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor >/dev/null 2>&1 || true
+fi
+if command -v xdg-icon-resource >/dev/null 2>&1; then
+  xdg-icon-resource forceupdate --theme hicolor >/dev/null 2>&1 || true
+fi

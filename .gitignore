@@ -1,0 +1,21 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+
+# Upstream proprietary payloads and extracted application content.
+*.pkg
+*.deb
+*.rpm
+*.pkg.tar.*
+*.tar.zst
+*.tar.xz
+output/
+
+# Local runtime artifacts.
+*.log
+*.pid
+TestResults/
+coverage/
